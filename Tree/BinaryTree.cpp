@@ -1,6 +1,6 @@
 #include "BinaryTree.h"
 
-BinaryTree:: BinaryTree()
+Tree:: Tree()
 {
 
 }
@@ -11,7 +11,7 @@ BinaryTree:: BinaryTree()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-int BinaryTree:: getWhichBaseOperation()
+int Tree:: getWhichBaseOperation()
 {
     string operationNumber;
 
@@ -43,7 +43,7 @@ int BinaryTree:: getWhichBaseOperation()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-int BinaryTree:: getWhichSecondaryOperation(int input)
+int Tree:: getWhichSecondaryOperation(int input)
 {
     string operationNumber;
     int selection;
@@ -91,7 +91,7 @@ int BinaryTree:: getWhichSecondaryOperation(int input)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: removeSpaces() 
+void Tree:: removeSpaces() 
 {
     string formattedString; 
 
@@ -115,7 +115,7 @@ void BinaryTree:: removeSpaces()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-bool BinaryTree:: isValid()
+bool Tree:: isValid()
 {
     if (inputPreorderString.length() == 0 || inputPreorderString[0] == '.') 
     {
@@ -145,7 +145,7 @@ bool BinaryTree:: isValid()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-string BinaryTree:: boolToString(bool input)
+string Tree:: boolToString(bool input)
 {
     if (input)
     {
@@ -161,7 +161,7 @@ string BinaryTree:: boolToString(bool input)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: setPreorderString(string input)
+void Tree:: setPreorderString(string input)
 {
     inputPreorderString = input;
 }
@@ -172,7 +172,7 @@ void BinaryTree:: setPreorderString(string input)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-string BinaryTree:: getPreorderString()
+string Tree:: getPreorderString()
 {
     return inputPreorderString;
 }
@@ -183,9 +183,9 @@ string BinaryTree:: getPreorderString()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-Node* BinaryTree:: createNode(char val)
+BinaryTree* Tree:: createNode(char val)
 {
-    Node *newNode = new Node;
+    BinaryTree *newNode = new BinaryTree;
     newNode->left       = NULL;
     newNode->right      = NULL;
     newNode->value      = val;
@@ -199,7 +199,7 @@ Node* BinaryTree:: createNode(char val)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-Node* BinaryTree:: buildHelper(int &index)
+BinaryTree* Tree:: buildHelper(int &index)
 {
     if (inputPreorderString[index] == '.')
     {
@@ -207,7 +207,7 @@ Node* BinaryTree:: buildHelper(int &index)
         return NULL;
     }
 
-    Node* root = createNode(inputPreorderString[index]);
+    BinaryTree* root = createNode(inputPreorderString[index]);
     index++;
 
     root->left = buildHelper(index);
@@ -222,7 +222,7 @@ Node* BinaryTree:: buildHelper(int &index)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-Node* BinaryTree:: buildTree(string input)
+BinaryTree* Tree:: buildTree(string input)
 {
     int index = 0;
     return buildHelper(index);
@@ -234,7 +234,7 @@ Node* BinaryTree:: buildTree(string input)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-bool BinaryTree:: isBSTHelper(Node* root, int min, int max)
+bool Tree:: isBSTHelper(BinaryTree* root, int min, int max)
 {
     if (root != NULL)
     {
@@ -256,7 +256,7 @@ bool BinaryTree:: isBSTHelper(Node* root, int min, int max)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-bool BinaryTree:: isBST(Node* root)
+bool Tree:: isBST(BinaryTree* root)
 {
     return isBSTHelper(root, INT_MIN, INT_MAX);
 }
@@ -267,7 +267,7 @@ bool BinaryTree:: isBST(Node* root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-int BinaryTree:: node_count()
+int Tree:: node_count()
 {
     int count = 0;
 
@@ -288,11 +288,11 @@ int BinaryTree:: node_count()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-int BinaryTree:: height(Node* root)
+int Tree:: height(BinaryTree* root)
 {
     if (root != NULL)
     {
-        queue<Node*> levels;
+        queue<BinaryTree*> levels;
   
         levels.push(root);
         int height = 0;
@@ -309,7 +309,7 @@ int BinaryTree:: height(Node* root)
 
             while (nodeCount > 0)
             {
-                Node *node = levels.front();
+                BinaryTree *node = levels.front();
                 levels.pop();
                 if (node->left != NULL)
                     levels.push(node->left);
@@ -329,7 +329,7 @@ int BinaryTree:: height(Node* root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-bool BinaryTree:: isFullBT(Node *root)
+bool Tree:: isFullBT(BinaryTree *root)
 {
     if (root == NULL)
     {
@@ -353,17 +353,17 @@ bool BinaryTree:: isFullBT(Node *root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-bool BinaryTree:: isComplete(Node *root)
+bool Tree:: isComplete(BinaryTree *root)
 {
     if (root != NULL)
     {
-        queue<Node*> levels;
+        queue<BinaryTree*> levels;
         levels.push(root);
         bool hasNone = false;
   
         while(!levels.empty())
         {
-            Node *node = levels.front();
+            BinaryTree *node = levels.front();
             
             levels.pop();
     
@@ -407,7 +407,7 @@ bool BinaryTree:: isComplete(Node *root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: printPreorder()
+void Tree:: printPreorder()
 {
     for (int i = 0; i < inputPreorderString.length(); i++) 
     {
@@ -421,7 +421,7 @@ void BinaryTree:: printPreorder()
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: printInorder(Node *root)
+void Tree:: printInorder(BinaryTree *root)
 {
     if (root != NULL)
     {
@@ -441,7 +441,7 @@ void BinaryTree:: printInorder(Node *root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: printPostorder(Node *root)
+void Tree:: printPostorder(BinaryTree *root)
 {
     if (root != NULL)
     {
@@ -462,17 +462,17 @@ void BinaryTree:: printPostorder(Node *root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: printLevelorder(Node *root)
+void Tree:: printLevelorder(BinaryTree *root)
 {
 
     if (root != NULL)
     {
-        queue<Node*> levels;
+        queue<BinaryTree*> levels;
         levels.push(root);
 
         while (!levels.empty())
         {
-            Node *node = levels.front();
+            BinaryTree *node = levels.front();
 
             if (node == NULL)
             {
@@ -502,7 +502,7 @@ void BinaryTree:: printLevelorder(Node *root)
 //                                                                       |
 //-----------------------------------------------------------------------|
 
-void BinaryTree:: run()
+void Tree:: run()
 {
     int primaryOperationNumber = getWhichBaseOperation();
     int secondaryOperationNumber;
